@@ -3,7 +3,11 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    setUserLocation,
+    centerMapOnUser,
+
+
 }
 
 const API_KEY ='AIzaSyBTe6kLY-SJi6miOaJI2r-Rotk_2VPWtAc'
@@ -41,7 +45,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = ''; //TODO: Enter your API Key
+    // const API_KEY = ''; //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -51,4 +55,19 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+
+function setUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(centerMapOnUser)
+    } else {
+      console.log('Geolocation is not supported by this browser.')
+    }
+  }
+
+  function centerMapOnUser(position) {
+    const center = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+    }
 }

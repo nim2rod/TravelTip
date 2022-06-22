@@ -1,6 +1,8 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 
+
+
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
@@ -13,6 +15,7 @@ function onInit() {
             console.log('Map is ready');
         })
         .catch(() => console.log('Error: cannot init map'));
+        
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -51,3 +54,11 @@ function onPanTo() {
     console.log('Panning the Map');
     mapService.panTo(35.6895, 139.6917);
 }
+
+///////
+
+function onSetUserLocation() {
+    console.log('setting user location...')
+    mapService.setUserLocation()
+  }
+
