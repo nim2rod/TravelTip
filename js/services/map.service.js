@@ -8,6 +8,7 @@ export const mapService = {
 
 const API_KEY ='AIzaSyBTe6kLY-SJi6miOaJI2r-Rotk_2VPWtAc'
 var gMap;
+let gMarker;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
@@ -23,13 +24,20 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
         })
 }
 
-function addMarker(loc) {
+function addMarker(loc, adress) {
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
-        title: 'Hello World!'
+        title: 'Adress'
     });
-    return marker;
+    attachMessage(adress);
+    setCenter(loc);
+}
+
+function attachMessage(adress) {
+    let infowindow = new google.maps.infowindow({
+        content: adress
+    })
 }
 
 function panTo(lat, lng) {
@@ -41,7 +49,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = ''; //TODO: Enter your API Key
+    const API_KEY = 'AIzaSyBTe6kLY-SJi6miOaJI2r-Rotk_2VPWtAc'; //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -52,3 +60,4 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
+
