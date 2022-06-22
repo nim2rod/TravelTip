@@ -6,6 +6,7 @@ export const mapService = {
     panTo
 }
 
+const API_KEY ='AIzaSyBTe6kLY-SJi6miOaJI2r-Rotk_2VPWtAc'
 var gMap;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
